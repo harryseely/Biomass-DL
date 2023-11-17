@@ -120,7 +120,7 @@ class FrontLayer(torch.nn.Module):
 
 class ClsHeader(torch.nn.Module):
 
-  def __init__(self, channels: List[int], out_channels: int, nempty: bool = False, dropout: float = 0.5):
+  def __init__(self, channels: List[int], out_channels: int, nempty: bool = False):
     super().__init__()
     self.channels = channels
     self.out_channels = out_channels
@@ -132,13 +132,6 @@ class ClsHeader(torch.nn.Module):
     self.header = torch.nn.Sequential(
         torch.nn.Flatten(start_dim=1),
         torch.nn.Linear(1024, out_channels, bias=True))
-
-    #***UNCOMMENT BELOW SECTION TO INCLUDE DROPOUT IN MODEL
-
-    # self.header = torch.nn.Sequential(
-    #     ocnn.modules.FcBnRelu(1024, 256), #CHanged from 512 to 1024
-    #     torch.nn.Dropout(p=dropout),
-    #     torch.nn.Linear(256, out_channels))
 
   def forward(self, data: List[torch.Tensor], octree: Octree, depth: int):
     full_depth = 2
@@ -159,14 +152,13 @@ class HRNet(torch.nn.Module):
   r''' Octree-based HRNet for classification and segmentation. '''
 
   def __init__(self, in_channels: int, out_channels: int, stages: int = 3,
-               interp: str = 'linear', nempty: bool = False, dropout=0.5):
+               interp: str = 'linear', nempty: bool = False):
     super().__init__()
     self.in_channels = in_channels
     self.out_channels = out_channels
     self.interp = interp
     self.nempty = nempty
     self.stages = stages
-    self.dropout = dropout
 
     self.resblk_num = 3
     self.channels = [128, 256, 512, 512]
@@ -179,7 +171,7 @@ class HRNet(torch.nn.Module):
         Transitions(self.channels[:i+2], nempty)
         for i in range(stages-1)])
 
-    self.cls_header = ClsHeader(self.channels[:stages], out_channels, nempty, dropout)
+    self.cls_header = ClsHeader(self.channels[:stages], out_channels, nempty)
 
   def forward(self, batch: dict):
     r''''''
