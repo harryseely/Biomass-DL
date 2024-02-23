@@ -3,7 +3,7 @@
 ## Overview
 This repository contains code used to train the Deep Neural Network (DNN) and Random Forest (RF) models from the study ["Modelling Tree Biomass Using Direct and Additive Methods with Point Cloud Deep Learning in a Temperate Mixed Forest"](https://doi.org/10.1016/j.srs.2023.100110) by Seely et al. 2023. This repository should be used as a reference for  information relating to the specific model architectures, training regimes, or any other technical details of the analysis.
 
-Please note that this repository is not set up as a python package. This code is provided t0 serve as a useful reference for further research and applications of point cloud deep learning for tree biomass regression.
+Please note that this repository is not set up as a python package. This code is provided to serve as a useful reference for further research and applications of point cloud deep learning for tree biomass regression.
 
 ## Trained Models
 Trained models are provided in the "trained_models" folder for both direct and additive AGB estimation.
