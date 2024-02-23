@@ -5,6 +5,9 @@ This repository contains code used to train the Deep Neural Network (DNN) and Ra
 
 Please note that this repository is not set up as a python package. This code is provided t0 serve as a useful reference for further research and applications of point cloud deep learning for tree biomass regression.
 
+## Trained Models
+Trained models are provided in the "trained_models" folder for both direct and additive AGB estimation.
+
 ## Visual Abstract
 <img src="Visual_Abstract.png" alt= “Visual_abstract_for_point_cloud_deep_learning” width="600" height="500">
 
